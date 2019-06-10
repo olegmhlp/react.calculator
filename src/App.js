@@ -16,18 +16,24 @@ class App extends React.Component {
   }
 
   onClick(buttonValue) {
-    if (+buttonValue || buttonValue == 0) {
-      this.setState(prevState => ({
-        current: prevState.current + buttonValue
-      }));
-    } else {
-      this.setState({
-        operation: buttonValue
-      });
-    }
+      this.setState({current: this.state.current + buttonValue})
+      if(this.state.current.toString().length >= 8){
+          document.getElementById('displayText').style.fontSize = '25px';
+      }
+    // if (+buttonValue || buttonValue == 0) {
+    //   this.setState(prevState => ({
+    //     current: prevState.current + buttonValue
+    //   }));
+    // } else {
+    //   this.setState({
+    //     operation: buttonValue
+    //   });
+    // }
 
     if (buttonValue === 'AC') {
-      this.setState({ current: 0 });
+      this.setState({ 
+          current: 0,
+        operation: null });
     }
     console.log(
       'Current: ' +

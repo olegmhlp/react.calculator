@@ -1,9 +1,11 @@
 .display{
     display: inline-block;
     width: 200px;
+    height: 150px;
     background-color: #1badad;
     text-align: right;
     color: white;
     font-size: 40px;
 
 }
+
