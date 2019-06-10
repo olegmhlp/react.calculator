@@ -14,7 +14,8 @@
 
 .buttonComponent:hover button{
     cursor: pointer;
-    background-color: aqua;
+    background-color: #1badad;
+    color: white;
 }
 
 .buttonComponent .operationButton{
@@ -24,4 +25,8 @@
 
 .buttonComponent .secondaryOperation{
    font-weight: bold;
+}
+
+.buttonComponent:active button{
+    background-color: #158686;
 }
