@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Button from './Button';
-import PropTypes from 'prop-types';
 import './ButtonsPanel.css';
 
 class ButtonsPanel extends Component {
