@@ -5,7 +5,7 @@ class Display extends Component {
   render() {
     return (
       <div className="display">
-        <p>{this.props.result}</p>
+        <p>{this.props.current}</p>
       </div>
     );
   }
