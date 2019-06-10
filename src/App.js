@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 import Display from './components/Display';
 import ButtonsPanel from './components/ButtonsPanel';
 import operations from './components/operations'
@@ -15,7 +16,7 @@ class App extends React.Component {
   }
 
   onClick(buttonValue) {
-     if(+buttonValue || buttonValue == 0){
+     if(+buttonValue || buttonValue === 0){
          this.setState({current: buttonValue })        
      } else (this.setState({operation: buttonValue}))
       

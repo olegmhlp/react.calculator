@@ -1,8 +1,9 @@
 .display{
     display: inline-block;
     width: 200px;
-    background-color: antiquewhite;
+    background-color: #1badad;
     text-align: right;
-    font-size: 30px;
+    color: white;
+    font-size: 40px;
 
 }
