@@ -1,16 +1,16 @@
-import operations from './operations';
+import { operations } from "./operations";
 
 export default function calculator(stateObj, buttonValue) {
   const { displayVal, firstOperand, isOperator, operator } = stateObj;
 
   if (isNumVal(buttonValue)) {
-    console.log('Number: ' + buttonValue);
+    console.log("Number: " + buttonValue);
 
-    if (displayVal === '0' && (buttonValue === '00' || buttonValue === '0')) {
+    if (displayVal === "0" && (buttonValue === "00" || buttonValue === "0")) {
       return {};
     }
 
-    if (displayVal === '0') {
+    if (displayVal === "0") {
       stateObj.isOperator = true;
       return { displayVal: buttonValue };
     } else {
@@ -20,42 +20,42 @@ export default function calculator(stateObj, buttonValue) {
   }
 
   if (isOperator) {
-    console.log('Operator: ' + buttonValue);
+    console.log("Operator: " + buttonValue);
     if (!firstOperand) {
       stateObj.firstOperand = displayVal;
       stateObj.operator = buttonValue;
-      stateObj.displayVal = '0';
+      stateObj.displayVal = "0";
     }
   }
 
   //---------------------------------------------------------
 
-  if (buttonValue === 'AC') {
+  if (buttonValue === "AC") {
     return {
-      displayVal: '0',
+      displayVal: "0",
       firstOperand: null,
       isSecondOperandNeed: false,
       operator: null
     };
   }
 
-  if (buttonValue === 'C') {
-    return { displayVal: '0' };
+  if (buttonValue === "C") {
+    return { displayVal: "0" };
   }
 
-  if (buttonValue === '+/-') {
+  if (buttonValue === "+/-") {
     return { displayVal: displayVal * -1 };
   }
 
-  if (buttonValue === '.') {
-    if (!displayVal.includes('.')) {
-      return { displayVal: displayVal + '.' };
+  if (buttonValue === ".") {
+    if (!displayVal.includes(".")) {
+      return { displayVal: displayVal + "." };
     } else return {};
   }
 
-  if (buttonValue === '=') {
+  if (buttonValue === "=") {
     const resultCalc = operations(+firstOperand, +displayVal, operator);
-    console.log(firstOperand + '\n' + displayVal + '\n' + operator);
+    console.log(firstOperand + "\n" + displayVal + "\n" + operator);
 
     return {
       operator: null,
@@ -73,6 +73,6 @@ function isNumVal(val) {
 
 function changeDisplayScale(value) {
   if (value.toString().length >= 8) {
-    document.getElementById('displayText').style.fontSize = '25px';
+    document.getElementById("displayText").style.fontSize = "25px";
   }
 }

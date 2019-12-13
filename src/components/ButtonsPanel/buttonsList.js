@@ -1,0 +1,22 @@
+export const buttonsList = [
+  { className: "secondaryOperation", value: "AC" },
+  { className: "secondaryOperation", value: "C" },
+  { className: "secondaryOperation", value: "+/-" },
+  { className: "operationButton", value: "/" },
+  { value: 7 },
+  { value: 8 },
+  { value: 9 },
+  { className: "operationButton", value: "*" },
+  { value: 4 },
+  { value: 5 },
+  { value: 6 },
+  { className: "operationButton", value: "-" },
+  { value: 1 },
+  { value: 2 },
+  { value: 3 },
+  { className: "operationButton", value: "+" },
+  { value: "00" },
+  { value: 0 },
+  { value: "." },
+  { className: "operationButton", value: "=" }
+];

@@ -1,33 +1,27 @@
-import React from 'react';
-import './App.css';
-import Display from './components/Display';
-import ButtonsPanel from './components/ButtonsPanel';
-import calculator from './calculate/calculator';
+import React, { useState } from "react";
+import "./App.css";
+import { Display, ButtonsPanel } from "./components";
+import calculator from "./utils/calculator";
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayVal: '0',
-            firstOperand: null,
-            isOperator: false,
-            operator: null
-        };
-        this.handleClick = this.handleClick.bind(this);
-    }
+const App = () => {
+  const [calcState, setCalcState] = useState({
+    displayVal: "0",
+    firstOperand: null,
+    isOperator: false,
+    operator: null
+  });
 
-    handleClick(buttonValue) {
-        this.setState(calculator(this.state, buttonValue));
-    }
+  const handleClick = event => {
+    let calcResult = calculator(calcState, event.target.value);
+    setCalcState({ ...calcState, ...calcResult });
+  };
 
-    render() {
-        return (
-            <div className="calculator">
-                <Display current={this.state.displayVal}/>
-                <ButtonsPanel onClick={this.handleClick}/>
-            </div>
-        );
-    }
-}
+  return (
+    <div className="calculator">
+      <Display current={calcState.displayVal} />
+      <ButtonsPanel onClick={handleClick} />
+    </div>
+  );
+};
 
 export default App;
