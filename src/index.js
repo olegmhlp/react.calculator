@@ -4,26 +4,16 @@ import { calculator, buttonsList } from './helper';
 import './index.css';
 
 const App = () => {
-  const [state, setState] = useState({
-    displayVal: '0',
-    firstOperand: null,
-    isOperator: false,
-    operator: null,
-  });
+  const [state, setState] = useState({ display: '0' });
 
-  const handleClick = ({ target: { value } }) =>
-    setState({
-      ...state,
-      ...calculator(state, value),
-    });
+  const onClick = ({ target: { value } }) =>
+    setState({ ...state, ...calculator(state, value) });
 
   return (
     <>
-      <div className="display">{state.displayVal}</div>
-      {buttonsList.map(({ val, style }) => (
-        <button key={val} className={style} onClick={handleClick} value={val}>
-          {val}
-        </button>
+      <div id="display">{state.display}</div>
+      {buttonsList.map((value) => (
+        <input type="button" className="input" onClick={onClick} value={value} />
       ))}
     </>
   );
