@@ -1,108 +1,72 @@
-const operations = (firstOperand, secondOperand, operation) => {
+const operations = (first, second, operation) => {
   switch (operation) {
     case '+':
-      return firstOperand + secondOperand;
+      return first + second;
     case '-':
-      return firstOperand - secondOperand;
+      return first - second;
     case '*':
-      return firstOperand * secondOperand;
+      return first * second;
     case '/':
-      return secondOperand === 0
-        ? 'Cannot divide by 0'
-        : firstOperand / secondOperand;
+      return second === 0 ? 'Cannot divide by 0' : first / second;
     default:
       console.log('Wrong operator');
   }
 };
 
-const buttonsList = [
-  { style: 'secondaryOperation', val: 'AC' },
-  { style: 'secondaryOperation', val: 'C' },
-  { style: 'secondaryOperation', val: '+/-' },
-  { style: 'operationButton', val: '/' },
-  { val: 7 },
-  { val: 8 },
-  { val: 9 },
-  { style: 'operationButton', val: '*' },
-  { val: 4 },
-  { val: 5 },
-  { val: 6 },
-  { style: 'operationButton', val: '-' },
-  { val: 1 },
-  { val: 2 },
-  { val: 3 },
-  { style: 'operationButton', val: '+' },
-  { val: '00' },
-  { val: 0 },
-  { val: '.' },
-  { style: 'operationButton', val: '=' },
-];
-
-const isNumVal = (val) => /^\d+$/.test(val);
-
-const changeDisplayScale = (val) => {
-  if (val.toString().length >= 8) {
-    document.getElementById('displayText').style.fontSize = '25px';
+const specialOperators = (button, display, firstOperand, operator) => {
+  switch (button) {
+    case 'AC':
+      return {
+        display: '0',
+        firstOperand: null,
+        operator: null,
+      };
+    case 'C':
+      return { display: '0' };
+    case '+/-':
+      return { display: display * -1 };
+    case '.':
+      return !display.includes('.') ? { display: display + '.' } : {};
+    case '=':
+      return {
+        operator: null,
+        firstOperand: null,
+        display: operations(Number(firstOperand), Number(display), operator),
+      };
+    default:
   }
 };
 
-function calculator(stateObj, buttonValue) {
-  const { displayVal, firstOperand, isOperator, operator } = stateObj;
+const buttonsList = [ 'AC', 'C', '+/-', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', '00', 0, '.', '='];
 
-  if (isNumVal(buttonValue)) {
-    if (displayVal === '0' && (buttonValue === '00' || buttonValue === '0')) {
+const isNumVal = (value) => /^\d+$/.test(value);
+
+const changeDisplayScale = (value) => {
+  if (value.toString().length >= 8) {
+    document.getElementById('display').style.fontSize = '25px';
+  }
+};
+
+const calculator = (state, button) => {
+  const { display, firstOperand, isOperator, operator } = state;
+
+  if (isNumVal(button)) {
+    if (display === '0' && (button === '00' || button === '0')) {
       return {};
     }
 
-    if (displayVal === '0') {
-      stateObj.isOperator = true;
-      return { displayVal: buttonValue };
-    } else {
-      stateObj.isOperator = true;
-      return { displayVal: displayVal + buttonValue };
+    if (display === '0') {
+      return { isOperator: true, display: button };
     }
+    changeDisplayScale(display);
+    return { isOperator: true, display: display + button };
   }
 
   if (isOperator && !firstOperand) {
-    stateObj.firstOperand = displayVal;
-    stateObj.operator = buttonValue;
-    stateObj.displayVal = '0';
+    return { firstOperand: display, operator: button, display: '0' };
   }
 
-  if (buttonValue === 'AC') {
-    return {
-      displayVal: '0',
-      firstOperand: null,
-      isSecondOperandNeed: false,
-      operator: null,
-    };
-  }
+  return specialOperators(button, display, firstOperand, operator);
+};
 
-  if (buttonValue === 'C') {
-    return { displayVal: '0' };
-  }
-
-  if (buttonValue === '+/-') {
-    return { displayVal: displayVal * -1 };
-  }
-
-  if (buttonValue === '.') {
-    if (!displayVal.includes('.')) {
-      return { displayVal: displayVal + '.' };
-    } else return {};
-  }
-
-  if (buttonValue === '=') {
-    const resultCalc = operations(+firstOperand, +displayVal, operator);
-    return {
-      operator: null,
-      firstOperand: null,
-      displayVal: resultCalc,
-    };
-  }
-
-  changeDisplayScale(displayVal);
-}
-
-
-export { calculator, operations, buttonsList, isNumVal, changeDisplayScale };
+export { calculator, buttonsList };
