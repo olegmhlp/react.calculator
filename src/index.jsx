@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { calculator, buttons } from './helper';
-import './index.css';
+import './styles.css';
 
 const App = () => {
   const [state, setState] = useState({ display: '0' });
