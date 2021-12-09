@@ -37,13 +37,13 @@ const specialOperators = (button, display, firstOperand, operator) => {
   }
 };
 
-const buttonsList = [ 'AC', 'C', '+/-', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', '00', 0, '.', '='];
+const buttons = [ 'AC', 'C', '+/-', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', '00', 0, '.', '='];
 
 const isNumVal = (value) => /^\d+$/.test(value);
 
 const changeDisplayScale = (value) => {
   if (value.toString().length >= 8) {
-    document.getElementById('display').style.fontSize = '25px';
+    document.getElementsByTagName('div')[1].style.fontSize = '25px';
   }
 };
 
@@ -69,4 +69,4 @@ const calculator = (state, button) => {
   return specialOperators(button, display, firstOperand, operator);
 };
 
-export { calculator, buttonsList };
+export { calculator, buttons };
