@@ -4,8 +4,9 @@ body {
   width: 200px;
 }
 
-div:first-child {
+input:first-child {
   display: flex;
+  width: 200px;
   justify-content: flex-end;
   align-items: center;
   height: 150px;

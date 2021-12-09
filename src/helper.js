@@ -37,7 +37,7 @@ const specialOperators = (button, display, firstOperand, operator) => {
   }
 };
 
-const buttons = [ 'AC', 'C', '+/-', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', '00', 0, '.', '='];
+const buttons = ['display', 'AC', 'C', '+/-', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', '00', 0, '.', '='];
 
 const isNumVal = (value) => /^\d+$/.test(value);
 
