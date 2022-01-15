@@ -4,11 +4,10 @@ import { calc, buttons } from './helper';
 import './styles.css';
 
 const App = () => {
-  const [state, setState] = useState({ display: '0' });
-  const onClick = (e) => setState({ ...state, ...calc(state, e) });
+  const [s, sT] = useState({ display: '0' });
 
   return buttons.map((i) => (
-    <input type="button" onClick={onClick} value={state[i] || i} key={i} />
+    <div onClick={() => sT({ ...s, ...calc(s, i) })}>{s[i] || i}</div>
   ));
 };
 

@@ -1,17 +1,9 @@
-const operations = (first, second, operation) => {
-  switch (operation) {
-    case '+':
-      return first + second;
-    case '-':
-      return first - second;
-    case '*':
-      return first * second;
-    case '/':
-      return second === 0 ? 'Cannot divide by 0' : first / second;
-    default:
-      console.log('Wrong operator');
-  }
-};
+const operations = (first, second, operation) => ({
+  '+': first + second,
+  '-': first - second,
+  '*': first * second,
+  '/': second === 0 ? 'Cannot divide by 0' : first / second,
+});
 
 const specialOperators = (button, display, firstOperand, operator) => {
   switch (button) {
@@ -37,7 +29,29 @@ const specialOperators = (button, display, firstOperand, operator) => {
   }
 };
 
-const buttons = ['display', 'AC', 'C', '+/-', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', '00', 0, '.', '='];
+const buttons = [
+  'display',
+  'AC',
+  'C',
+  '+/-',
+  '/',
+  7,
+  8,
+  9,
+  '*',
+  4,
+  5,
+  6,
+  '-',
+  1,
+  2,
+  3,
+  '+',
+  '00',
+  0,
+  '.',
+  '=',
+];
 
 const isNumVal = (value) => /^\d+$/.test(value);
 
@@ -47,26 +61,26 @@ const changeDisplayScale = (value) => {
   }
 };
 
-const calculator = (state, button) => {
+const calc = (state, value) => {
   const { display, firstOperand, isOperator, operator } = state;
 
-  if (isNumVal(button)) {
-    if (display === '0' && (button === '00' || button === '0')) {
+  if (isNumVal(value)) {
+    if (display === '0' && (value === '00' || value === '0')) {
       return {};
     }
 
     if (display === '0') {
-      return { isOperator: true, display: button };
+      return { isOperator: true, display: value };
     }
     changeDisplayScale(display);
-    return { isOperator: true, display: display + button };
+    return { isOperator: true, display: display + value };
   }
 
   if (isOperator && !firstOperand) {
-    return { firstOperand: display, operator: button, display: '0' };
+    return { firstOperand: display, operator: value, display: '0' };
   }
 
-  return specialOperators(button, display, firstOperand, operator);
+  return specialOperators(value, display, firstOperand, operator);
 };
 
-export { calculator, buttons };
+export { calc, buttons };
