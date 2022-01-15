@@ -7,6 +7,7 @@ body {
 input:first-child {
   display: flex;
   width: 200px;
+  cursor: default !important;
   justify-content: flex-end;
   align-items: center;
   height: 150px;
